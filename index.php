@@ -40,6 +40,21 @@ $hotels = [
 
 ];
 
+$parkFilter = isset($_GET['park-filter']) && $_GET['park-filter'] === 'on' ? true : false;
+
+$filteredHotels = $hotels;
+
+if ($parkFilter) {
+    $hotelsWithParking = [];
+    foreach ($filteredHotels as $hotel) {
+        if ($hotel['parking'] === true) {
+            $hotelsWithParking[] = $hotel;
+        }
+    }
+    $filteredHotels = $hotelsWithParking;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -55,11 +70,17 @@ $hotels = [
 
 <body>
 
-    <div class="container text-center">
+    <div class="container">
 
-        <h1 class="mt-3">Hotels</h1>
+        <h1 class="mt text-center m-3">Hotels</h1>
 
-        <table class="table mt-5">
+        <form method="GET" class="ms-3">
+            <label for="park-filter">Parking</label>
+            <input type="checkbox" id="park-filter" name="park-filter">
+            <button class="btn btn-primary d-block mt-3" type="submit">Done</button>
+        </form>
+
+        <table class="table text-center mt-5">
             <thead>
                 <tr>
                     <?php foreach ($hotels as $hotel) ?>
@@ -70,12 +91,12 @@ $hotels = [
             </thead>
 
             <tbody>
-                <?php foreach ($hotels as $hotel) { ?>
-                    <tr>
-                        <?php foreach ($hotel as $key => $value) { ?>
-                            <td><?php echo $value ?></td>
-                        <?php } ?>
-                    </tr>
+                <?php foreach ($filteredHotels as $hotel) { ?>
+                        <tr>
+                            <?php foreach ($hotel as $value) { ?>
+                                <td><?php echo $value ?></td>
+                            <?php } ?>
+                        </tr>
                 <?php } ?>
             </tbody>
         </table>
