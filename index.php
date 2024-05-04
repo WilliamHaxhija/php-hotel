@@ -49,9 +49,38 @@ $hotels = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
+
+    <div class="container text-center">
+
+        <h1 class="mt-3">Hotels</h1>
+
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <?php foreach ($hotels as $hotel) ?>
+                    <?php foreach ($hotel as $key => $value) { ?>
+                        <th><?php echo $key ?></th>
+                    <?php } ?>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($hotels as $hotel) { ?>
+                    <tr>
+                        <?php foreach ($hotel as $key => $value) { ?>
+                            <td><?php echo $value ?></td>
+                        <?php } ?>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+
+    </div>
 
 </body>
 
